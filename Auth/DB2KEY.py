@@ -1,13 +1,9 @@
 import json
 
 data_to_add={
-    'Adress': '10.0.0.16',
-    'Port': '3308',
-    'Username': 'TEST',
-    'Password': '123456789',
-    'Database': 'Test_DB',
+    'Adress': "http://10.0.0.21/con1.php"
 }
-target_connection = 'MariaDB'
+target_connection = 'WWW_unsecure'
 
 def Read_KEY():
     with open('../auth.key', 'r') as j:
