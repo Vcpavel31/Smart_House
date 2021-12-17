@@ -52,7 +52,7 @@ class MyApp(QMainWindow):
                 print(("S0" if (z["seasonNumber"]<10) else "S") +str(z["seasonNumber"])+("E0" if (z["episodeNumber"]<10) else "E")+str(z["episodeNumber"]),"=",z["hasFile"])
                 if(z["hasFile"] == False): ## Dont search for already downloaded files
                     #if(z["seasonNumber"] >= 1): ##### Dont search for bonuses :D Becuse czech peoples ARE IDIOTS
-                    if((z["monitored"] == True): ## Filter out not monitored serials 
+                    if(z["monitored"] == True): ## Filter out not monitored serials 
                         print("Opening web browser.")
                         search = browser.find_element(By.XPATH, '//*[@id="search-input"]')
                         search.clear()

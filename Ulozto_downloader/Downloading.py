@@ -12,6 +12,7 @@ Done = ""
 
 def ERROR(url):
     if(url != ""):
+        print("ulozto-downloader  --auto-captcha --parts 100 --output /home/pi/downloader/ "+str(url))
         if(os.path.isfile("mem.lock")):
             time.sleep(45)
             ERROR(url)
@@ -51,6 +52,7 @@ def check_LOCK():
             print ("Downloading done.")
             output = (process.stdout.decode('utf-8'))
             shutil.move(output.split("Delete file: ")[1].split(".udown")[0], "/home/pi/downloader/done")
+            shutil.move(str(output.split("Delete file: ")[1].split(".udown")[0])+str(".ucache"), "/home/pi/downloader/ucache")
             print ("Moving done.")
             global Done
             Done = url_global
