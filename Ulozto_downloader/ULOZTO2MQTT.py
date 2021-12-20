@@ -9,6 +9,15 @@ from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow,
                              QMessageBox, QPushButton, QVBoxLayout, 
                              QWidget, QLineEdit)
 
+def Key(name):
+    if(name == "The Flash (2014)"):
+        return "The Flash"
+    else:
+        if(name == "The Grand Tour (2016)"):
+            return "The Grand Tour"
+        else:
+            return name
+
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -43,7 +52,7 @@ class MyApp(QMainWindow):
         for x in y['records']:
     
             print(x["series"]["title"])
-            name = x["series"]["title"]
+            name = Key(x["series"]["title"])
             url = "http://10.0.0.16:8989/api/v3/episode?seriesId="+str(x["seriesId"])
             resp = requests.get(url,headers=headers)
             y = json.loads(resp.content)
