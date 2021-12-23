@@ -7,6 +7,7 @@ https://github.com/setnicka/ulozto-downloader
 ```shell
 pip3 install --upgrade ulozto-downloader
 ```
+https://www.tensorflow.org/lite/guide/python
 ```shell
 echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
