@@ -15,6 +15,7 @@ try:
 except:
     f = open('mem.json', 'w')
     json.dump(data, f)
+    f.close()
     
 def on_message(client, userdata, message):
     data = json.loads(str(open('mem.json', 'r').read()))
@@ -31,7 +32,7 @@ def connect(client):
         client.connect(broker_address,port) #connect to broker
         print("Connected to MQTT broker")
         while(1):
-            lient.loop_start() #start the loop
+            client.loop_start() #start the loop
             print("Subscribing to topic","house/ulozto")
             client.subscribe("house/ulozto")
             time.sleep(3595)
@@ -40,6 +41,28 @@ def connect(client):
         print("Connection failed trying again in 30 seconds.")
         time.sleep(30)
         connect(client)
+
+def start():
+    data = json.loads(str(open('mem.json', 'r').read()))
+    sort = {}
+    sort['Download'] = []
+    sort['Downloading'] = []
+    sort['Downloaded'] = data["Downloaded"]
+    for url in data["Download"]:
+        if(url not in data["Downloaded"]):
+            if(url not in sort['Download']):
+                sort['Download'].append(url)
+    for url in data["Downloading"]:
+        if(url not in data["Downloaded"]):
+            if(url not in sort['Download']):
+                sort['Download'].append(url)
+    
+    f = open('mem.json', 'w')
+    json.dump(sort, f)
+    f.close()
+    print("Deduplication done!")
+
+start()
 
 print("creating new instance")
 client = mqtt.Client("Downloader_2") #create new instance

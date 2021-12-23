@@ -56,6 +56,12 @@ def check_LOCK():
             print ("Moving done.")
             global Done
             Done = url_global
+            
+            data = json.loads(str(open('mem.json', 'r').read()))
+            data["Downloaded"].append(url_global)
+            f = open('mem.json', 'w')
+            json.dump(data, f)
+            f.close()
         except:
             ERROR(url_global)
     return 1
