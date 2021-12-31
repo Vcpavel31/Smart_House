@@ -11,12 +11,15 @@ from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow,
 
 def Key(name):
     if(name == "The Flash (2014)"):
-        return "The Flash"
+        return "The Flash",1
     else:
         if(name == "The Grand Tour (2016)"):
-            return "The Grand Tour"
+            return "The Grand Tour",1
         else:
-            return name
+            if(name == "Specialisté"):
+                return name,0
+            else:
+                return name,1
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -52,7 +55,7 @@ class MyApp(QMainWindow):
         for x in y['records']:
     
             print(x["series"]["title"])
-            name = Key(x["series"]["title"])
+            name, cz = Key(x["series"]["title"])
             url = "http://10.0.0.16:8989/api/v3/episode?seriesId="+str(x["seriesId"])
             resp = requests.get(url,headers=headers)
             y = json.loads(resp.content)
@@ -65,7 +68,10 @@ class MyApp(QMainWindow):
                         print("Opening web browser.")
                         search = browser.find_element(By.XPATH, '//*[@id="search-input"]')
                         search.clear()
-                        search.send_keys(str(name)+" "+("S0" if (z["seasonNumber"]<10) else "S") +str(z["seasonNumber"])+("E0" if (z["episodeNumber"]<10) else "E")+str(z["episodeNumber"])+" CZ")
+                        if(cz == 1):
+                            search.send_keys(str(name)+" "+("S0" if (z["seasonNumber"]<10) else "S") +str(z["seasonNumber"])+("E0" if (z["episodeNumber"]<10) else "E")+str(z["episodeNumber"])+" CZ")
+                        else:
+                            search.send_keys(str(name)+" "+("S0" if (z["seasonNumber"]<10) else "S") +str(z["seasonNumber"])+("E0" if (z["episodeNumber"]<10) else "E")+str(z["episodeNumber"]))
                         client.connect("10.0.0.16",1883)
                         button = browser.find_element(By.XPATH, '//*[@id="search"]/button')
                         button.click()
