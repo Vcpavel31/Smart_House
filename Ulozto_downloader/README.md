@@ -1,4 +1,4 @@
-# Uloû.to downloader
+# Smart_House - Ulo≈æ.to downloader
 
 https://github.com/setnicka/ulozto-downloader
 
