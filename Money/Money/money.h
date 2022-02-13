@@ -2,6 +2,9 @@
 #define MONEY_H
 
 #include <QMainWindow>
+#include <QSqlQuery>
+#include <QSqlError>
+
 #include <tablemodel.h>
 
 QT_BEGIN_NAMESPACE
