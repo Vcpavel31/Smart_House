@@ -20,6 +20,7 @@ except:
 def on_message(client, userdata, message):
     data = json.loads(str(open('mem.json', 'r').read()))
     data['Download'].append(str(message.payload.decode("utf-8")))
+    print(message.payload.decode("utf-8"))
     myFile = open("mem.lock", "w+")
     myFile.close()
     f = open('mem.json', 'w')
